@@ -17,7 +17,7 @@ const CollabButton = ({
 }) => {
   return (
     <>
-      <ToolButton
+      {/* <ToolButton
         className={clsx("CollabButton", {
           "is-collaborating": isCollaborating,
         })}
@@ -31,7 +31,7 @@ const CollabButton = ({
         {isCollaborating && (
           <div className="CollabButton-collaborators">{collaboratorCount}</div>
         )}
-      </ToolButton>
+      </ToolButton> */}
     </>
   );
 };

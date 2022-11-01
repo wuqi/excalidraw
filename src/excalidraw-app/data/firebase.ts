@@ -306,40 +306,40 @@ export const loadFilesFromFirebase = async (
   const loadedFiles: BinaryFileData[] = [];
   const erroredFiles = new Map<FileId, true>();
 
-  await Promise.all(
-    [...new Set(filesIds)].map(async (id) => {
-      try {
-        const url = `https://firebasestorage.googleapis.com/v0/b/${
-          FIREBASE_CONFIG.storageBucket
-        }/o/${encodeURIComponent(prefix.replace(/^\//, ""))}%2F${id}`;
-        const response = await fetch(`${url}?alt=media`);
-        if (response.status < 400) {
-          const arrayBuffer = await response.arrayBuffer();
+  // await Promise.all(
+  //   [...new Set(filesIds)].map(async (id) => {
+  //     try {
+  //       const url = `https://firebasestorage.googleapis.com/v0/b/${
+  //         FIREBASE_CONFIG.storageBucket
+  //       }/o/${encodeURIComponent(prefix.replace(/^\//, ""))}%2F${id}`;
+  //       const response = await fetch(`${url}?alt=media`);
+  //       if (response.status < 400) {
+  //         const arrayBuffer = await response.arrayBuffer();
 
-          const { data, metadata } = await decompressData<BinaryFileMetadata>(
-            new Uint8Array(arrayBuffer),
-            {
-              decryptionKey,
-            },
-          );
+  //         const { data, metadata } = await decompressData<BinaryFileMetadata>(
+  //           new Uint8Array(arrayBuffer),
+  //           {
+  //             decryptionKey,
+  //           },
+  //         );
 
-          const dataURL = new TextDecoder().decode(data) as DataURL;
+  //         const dataURL = new TextDecoder().decode(data) as DataURL;
 
-          loadedFiles.push({
-            mimeType: metadata.mimeType || MIME_TYPES.binary,
-            id,
-            dataURL,
-            created: metadata?.created || Date.now(),
-          });
-        } else {
-          erroredFiles.set(id, true);
-        }
-      } catch (error: any) {
-        erroredFiles.set(id, true);
-        console.error(error);
-      }
-    }),
-  );
+  //         loadedFiles.push({
+  //           mimeType: metadata.mimeType || MIME_TYPES.binary,
+  //           id,
+  //           dataURL,
+  //           created: metadata?.created || Date.now(),
+  //         });
+  //       } else {
+  //         erroredFiles.set(id, true);
+  //       }
+  //     } catch (error: any) {
+  //       erroredFiles.set(id, true);
+  //       console.error(error);
+  //     }
+  //   }),
+  // );
 
   return { loadedFiles, erroredFiles };
 };

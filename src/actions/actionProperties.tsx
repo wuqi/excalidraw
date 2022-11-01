@@ -16,6 +16,7 @@ import {
   FontFamilyCodeIcon,
   FontFamilyHandDrawnIcon,
   FontFamilyNormalIcon,
+  FontFamilyChineseIcon,
   FontSizeExtraLargeIcon,
   FontSizeLargeIcon,
   FontSizeMediumIcon,
@@ -669,6 +670,11 @@ export const actionChangeFontFamily = register({
         value: FONT_FAMILY.Cascadia,
         text: t("labels.code"),
         icon: <FontFamilyCodeIcon theme={appState.theme} />,
+      },
+      {
+        value: FONT_FAMILY.Chinese,
+        text: "中文手写字体",
+        icon: <FontFamilyChineseIcon theme={appState.theme} />,
       },
     ];
 

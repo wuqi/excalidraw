@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { t } from "../i18n";
 import { AppState } from "../types";
 import { capitalizeString } from "../utils";
-import { trackEvent } from "../analytics";
+// import { trackEvent } from "../analytics";
 import { useDevice } from "./App";
 
 const LIBRARY_ICON = (
@@ -44,11 +44,11 @@ export const LibraryButton: React.FC<{
           setAppState({ openSidebar: isOpen ? "library" : null });
           // track only openings
           if (isOpen) {
-            trackEvent(
-              "library",
-              "toggleLibrary (open)",
-              `toolbar (${device.isMobile ? "mobile" : "desktop"})`,
-            );
+            // trackEvent(
+            //   "library",
+            //   "toggleLibrary (open)",
+            //   `toolbar (${device.isMobile ? "mobile" : "desktop"})`,
+            // );
           }
         }}
         checked={appState.openSidebar === "library"}

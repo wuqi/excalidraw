@@ -361,6 +361,7 @@ export const generateRoughOptions = (
     roughness: element.roughness,
     stroke: element.strokeColor,
     preserveVertices: continuousPath,
+    hachureAngle:15*(Math.floor(Math.random()*11)),
   };
 
   switch (element.type) {

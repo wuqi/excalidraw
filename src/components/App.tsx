@@ -40,7 +40,7 @@ import { createRedoAction, createUndoAction } from "../actions/actionHistory";
 import { ActionManager } from "../actions/manager";
 import { actions } from "../actions/register";
 import { ActionResult } from "../actions/types";
-import { trackEvent } from "../analytics";
+// import { trackEvent } from "../analytics";
 import { getDefaultAppState, isEraserActive } from "../appState";
 import {
   parseClipboard,
@@ -76,7 +76,6 @@ import {
   THEME,
   TOUCH_CTX_MENU_TIMEOUT,
   VERTICAL_ALIGN,
-  ZOOM_STEP,
 } from "../constants";
 import { loadFromBlob } from "../data";
 import Library, { distributeLibraryItemsOnSquareGrid } from "../data/library";
@@ -1655,11 +1654,11 @@ class App extends React.Component<AppProps, AppState> {
 
   toggleLock = (source: "keyboard" | "ui" = "ui") => {
     if (!this.state.activeTool.locked) {
-      trackEvent(
-        "toolbar",
-        "toggleLock",
-        `${source} (${this.device.isMobile ? "mobile" : "desktop"})`,
-      );
+      // trackEvent(
+      //   "toolbar",
+      //   "toggleLock",
+      //   `${source} (${this.device.isMobile ? "mobile" : "desktop"})`,
+      // );
     }
     this.setState((prevState) => {
       return {
@@ -1887,11 +1886,11 @@ class App extends React.Component<AppProps, AppState> {
         const nextState = this.toggleMenu("library");
         // track only openings
         if (nextState) {
-          trackEvent(
-            "library",
-            "toggleLibrary (open)",
-            `keyboard (${this.device.isMobile ? "mobile" : "desktop"})`,
-          );
+          // trackEvent(
+          //   "library",
+          //   "toggleLibrary (open)",
+          //   `keyboard (${this.device.isMobile ? "mobile" : "desktop"})`,
+          // );
         }
       }
 
@@ -1980,11 +1979,11 @@ class App extends React.Component<AppProps, AppState> {
         const shape = findShapeByKey(event.key);
         if (shape) {
           if (this.state.activeTool.type !== shape) {
-            trackEvent(
-              "toolbar",
-              shape,
-              `keyboard (${this.device.isMobile ? "mobile" : "desktop"})`,
-            );
+            // trackEvent(
+            //   "toolbar",
+            //   shape,
+            //   `keyboard (${this.device.isMobile ? "mobile" : "desktop"})`,
+            // );
           }
           this.setActiveTool({ type: shape });
           event.stopPropagation();
@@ -6098,7 +6097,7 @@ class App extends React.Component<AppProps, AppState> {
     // note that event.ctrlKey is necessary to handle pinch zooming
     if (event.metaKey || event.ctrlKey) {
       const sign = Math.sign(deltaY);
-      const MAX_STEP = ZOOM_STEP * 100;
+      const MAX_STEP = 10;
       const absDelta = Math.abs(deltaY);
       let delta = deltaY;
       if (absDelta > MAX_STEP) {

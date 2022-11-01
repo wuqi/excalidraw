@@ -14,7 +14,7 @@ import { t } from "../../i18n";
 import "./RoomDialog.scss";
 import Stack from "../../components/Stack";
 import { AppState } from "../../types";
-import { trackEvent } from "../../analytics";
+// import { trackEvent } from "../../analytics";
 import { getFrame } from "../../utils";
 
 const getShareIcon = () => {
@@ -98,7 +98,7 @@ const RoomDialog = ({
                 aria-label={t("roomDialog.button_startSession")}
                 showAriaLabel={true}
                 onClick={() => {
-                  trackEvent("share", "room creation", `ui (${getFrame()})`);
+                  // trackEvent("share", "room creation", `ui (${getFrame()})`);
                   onRoomCreate();
                 }}
               />
@@ -166,7 +166,7 @@ const RoomDialog = ({
                 aria-label={t("roomDialog.button_stopSession")}
                 showAriaLabel={true}
                 onClick={() => {
-                  trackEvent("share", "room closed");
+                  // trackEvent("share", "room closed");
                   onRoomDestroy();
                 }}
               />

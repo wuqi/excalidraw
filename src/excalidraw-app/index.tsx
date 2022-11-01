@@ -244,17 +244,6 @@ const PlusLPLinkJSX = (
   </p>
 );
 
-const PlusAppLinkJSX = (
-  <a
-    href={`${process.env.REACT_APP_PLUS_APP}/#excalidraw-redirect`}
-    target="_blank"
-    rel="noreferrer"
-    className="plus-button"
-  >
-    Go to Excalidraw+
-  </a>
-);
-
 const ExcalidrawWrapper = () => {
   const [errorMessage, setErrorMessage] = useState("");
   let currentLangCode = languageDetector.detect() || defaultLang.code;
@@ -603,27 +592,6 @@ const ExcalidrawWrapper = () => {
     }
   };
 
-  const renderTopRightUI = useCallback(
-    (isMobile: boolean, appState: AppState) => {
-      if (isMobile) {
-        return null;
-      }
-
-      return (
-        <div
-          style={{
-            width: isExcalidrawPlusSignedUser ? "21ch" : "23ch",
-            fontSize: "0.7em",
-            textAlign: "center",
-          }}
-        >
-          {isExcalidrawPlusSignedUser ? PlusAppLinkJSX : PlusLPLinkJSX}
-        </div>
-      );
-    },
-    [],
-  );
-
   const renderFooter = useCallback(
     (isMobile: boolean) => {
       const renderEncryptedIcon = () => (
@@ -661,23 +629,6 @@ const ExcalidrawWrapper = () => {
               {renderLanguageList()}
             </fieldset>
             {/* FIXME remove after 2021-05-20 */}
-            <div
-              style={{
-                width: "24ch",
-                fontSize: "0.7em",
-                textAlign: "center",
-                marginTop: isTinyDevice ? 16 : undefined,
-                marginLeft: "auto",
-                marginRight: isTinyDevice ? "auto" : undefined,
-                padding: isExcalidrawPlusSignedUser ? undefined : "4px 2px",
-                border: isExcalidrawPlusSignedUser
-                  ? undefined
-                  : "1px dashed #aaa",
-                borderRadius: 12,
-              }}
-            >
-              {isExcalidrawPlusSignedUser ? PlusAppLinkJSX : PlusLPLinkJSX}
-            </div>
           </div>
         );
       }
@@ -751,7 +702,6 @@ const ExcalidrawWrapper = () => {
             },
           },
         }}
-        renderTopRightUI={renderTopRightUI}
         renderFooter={renderFooter}
         langCode={langCode}
         renderCustomStats={renderCustomStats}

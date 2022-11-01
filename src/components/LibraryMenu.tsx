@@ -18,7 +18,7 @@ import "./LibraryMenu.scss";
 import LibraryMenuItems from "./LibraryMenuItems";
 import { EVENT, VERSIONS } from "../constants";
 import { KEYS } from "../keys";
-import { trackEvent } from "../analytics";
+// import { trackEvent } from "../analytics";
 import { useAtom } from "jotai";
 import { jotaiScope } from "../jotai";
 import Spinner from "./Spinner";
@@ -101,7 +101,7 @@ export const LibraryMenuContent = ({
 
   const addToLibrary = useCallback(
     async (elements: LibraryItem["elements"], libraryItems: LibraryItems) => {
-      trackEvent("element", "addToLibrary", "ui");
+      //("element", "addToLibrary", "ui");
       if (elements.some((element) => element.type === "image")) {
         return setAppState({
           errorMessage: "Support for adding images to the library coming soon!",
@@ -266,11 +266,11 @@ export const LibraryMenu: React.FC<{
       key="library"
       className="layer-ui__library-sidebar"
       onDock={(docked) => {
-        trackEvent(
-          "library",
-          `toggleLibraryDock (${docked ? "dock" : "undock"})`,
-          `sidebar (${device.isMobile ? "mobile" : "desktop"})`,
-        );
+        // trackEvent(
+        //   "library",
+        //   `toggleLibraryDock (${docked ? "dock" : "undock"})`,
+        //   `sidebar (${device.isMobile ? "mobile" : "desktop"})`,
+        // );
       }}
       ref={ref}
     >
